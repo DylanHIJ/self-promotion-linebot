@@ -15,9 +15,6 @@ handler = WebhookHandler(os.getenv('CHANNEL_SECRET', None))
 with open('./msgs.json') as msg_file:
     response_msgs = json.load(msg_file)
 
-with open('./quick_reply.json') as qr_file:
-    quick_reply = json.load(qr_file)
-
 quick_replies = [ 
     QuickReplyButton(action=MessageAction(label="1", text="1")),
     QuickReplyButton(action=MessageAction(label="2", text="2")),
@@ -25,7 +22,7 @@ quick_replies = [
     QuickReplyButton(action=MessageAction(label="4", text="4"))
 ]
 
-welcome_msg =\
+invalid_msg =\
 """Oops, Invalid option!
 
 If you would like to know more about me, here are some options for you:
@@ -61,7 +58,7 @@ def handle_message(event):
         msg = TextSendMessage(text=response_msgs[event.message.text])
         line_bot_api.reply_message(event.reply_token, msg)
     else:
-        msg = TextSendMessage(text=welcome_msg, quick_reply=QuickReply(items=quick_replies))
+        msg = TextSendMessage(text=invalid_msg, quick_reply=QuickReply(items=quick_replies))
         line_bot_api.reply_message(event.reply_token, msg)
 
 # handle sticker message
