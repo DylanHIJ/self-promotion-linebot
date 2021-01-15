@@ -18,6 +18,13 @@ with open('./msgs.json') as msg_file:
 with open('./quick_reply.json') as qr_file:
     quick_reply = json.load(qr_file)
 
+quick_replies = [ 
+    QuickReplyButton(action=MessageAction(label="1", text="1")),
+    QuickReplyButton(action=MessageAction(label="2", text="2")),
+    QuickReplyButton(action=MessageAction(label="3", text="3")),
+    QuickReplyButton(action=MessageAction(label="4", text="4"))
+]
+
 welcome_msg =\
 """Oops, Invalid option!
 
@@ -54,7 +61,7 @@ def handle_message(event):
         msg = TextSendMessage(text=response_msgs[event.message.text])
         line_bot_api.reply_message(event.reply_token, msg)
     else:
-        msg = TextSendMessage(text=welcome_msg, quick_reply=quick_reply)
+        msg = TextSendMessage(text=welcome_msg, quick_reply=QuickReply(items=quick_replies))
         line_bot_api.reply_message(event.reply_token, msg)
 
 # handle sticker message
