@@ -12,11 +12,11 @@ app = Flask(__name__)
 line_bot_api = LineBotApi(os.getenv('CHANNEL_ACCESS_TOKEN', None))
 handler = WebhookHandler(os.getenv('CHANNEL_SECRET', None))
 
-with open('./msgs.json') as f:
-    response_msgs = json.load(f)
+with open('./msgs.json') as msg_file:
+    response_msgs = json.load(msg_file)
 
-with open('./quick_reply.json') as f:
-    quick_reply = json.load(f)
+with open('./quick_reply.json') as qr_file:
+    quick_reply = json.load(qr_file)
 
 welcome_msg =\
 """Oops, Invalid option!
