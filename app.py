@@ -13,7 +13,10 @@ line_bot_api = LineBotApi(os.getenv('CHANNEL_ACCESS_TOKEN', None))
 handler = WebhookHandler(os.getenv('CHANNEL_SECRET', None))
 
 with open('./msgs.json') as f:
-  response_msgs = json.load(f)
+    response_msgs = json.load(f)
+
+with open('./quick_reply.json') as f:
+    quick_reply = json.load(f)
 
 welcome_msg =\
 """Oops, Invalid option!
@@ -51,7 +54,7 @@ def handle_message(event):
         msg = TextSendMessage(text=response_msgs[event.message.text])
         line_bot_api.reply_message(event.reply_token, msg)
     else:
-        msg = TextSendMessage(text=welcome_msg)
+        msg = TextSendMessage(text=welcome_msg, quickReply=quick_reply)
         line_bot_api.reply_message(event.reply_token, msg)
 
 # handle sticker message
@@ -64,4 +67,3 @@ def handle_sticker(event):
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port)
-
