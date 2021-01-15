@@ -54,7 +54,7 @@ def handle_message(event):
         msg = TextSendMessage(text=response_msgs[event.message.text])
         line_bot_api.reply_message(event.reply_token, msg)
     else:
-        msg = TextSendMessage(text=welcome_msg, quickReply=quick_reply)
+        msg = TextSendMessage(text=welcome_msg, quick_reply=quick_reply)
         line_bot_api.reply_message(event.reply_token, msg)
 
 # handle sticker message
