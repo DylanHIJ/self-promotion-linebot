@@ -13,29 +13,29 @@ handler = WebhookHandler(os.getenv('CHANNEL_SECRET', None))
 
 response_msgs= {
     "1": """
-         National Taiwan University, Sep. 2017 ~ Jun. 2021 (Expected) \n
-         B.S., Computer Science and Information Engineering
-         """,
+- National Taiwan University, Sep. 2017 ~ Jun. 2021 (Expected) 
+- B.S., Computer Science and Information Engineering
+""",
     "2": """
-         - DBS Bank, Taiwan - IT Intern
-         - Shopee Taiwan I’m the Best Coder! Challenge 2020 - 3rd Place 
-         - Digital Speech Processing Laboratory, National Taiwan University - Undergraduate Researcher 
-         - Freshman ACM Contest in NTU CSIE - 6th Place
-         - Changhua Alumni Association, National Taiwan University - Director 
-         - Academic Dept., 2018 CSIE Night - Frontend Web Developer
-         """,
+- DBS Bank, Taiwan - IT Intern
+- Shopee Taiwan I’m the Best Coder! Challenge 2020 - 3rd Place 
+- Digital Speech Processing Laboratory, National Taiwan University - Undergraduate Researcher 
+- Freshman ACM Contest in NTU CSIE - 6th Place
+- Changhua Alumni Association, National Taiwan University - Director 
+- Academic Dept., 2018 CSIE Night - Frontend Web Developer
+""",
     "3": """
-         - New York Times Bilingual News Crawler (Using Python)
-         - Implementation of Shading and Transformation (Using WebGL)
-         - Machine Learning Competitions on Kaggle (Mainly using PyTorch)
-         """,
+ - New York Times Bilingual News Crawler (Using Python)
+ - Implementation of Shading and Transformation (Using WebGL)
+ - Machine Learning Competitions on Kaggle (Mainly using PyTorch)
+ """,
     "4": """
-         - C/C++
-         - Python
-         - HTML/CSS/Javascript(React.js)
-         - Linux/Shell Script
-         - Git
-         """
+ - C/C++
+ - Python
+ - HTML/CSS/Javascript(React.js)
+ - Linux/Shell Script
+ - Git
+ """
 }
 
 welcome_msg = """
