@@ -2,27 +2,56 @@ import os
 import psycopg2
 import random
 from flask import Flask, request, abort
-
-from linebot import (
-    LineBotApi, WebhookHandler
-)
-from linebot.exceptions import (
-    InvalidSignatureError
-)
+from linebot import LineBotApi, WebhookHandler
+from linebot.exceptions import InvalidSignatureError
 from linebot.models import *
 
 app = Flask(__name__)
 
-# Channel Access Token
 line_bot_api = LineBotApi(os.getenv('CHANNEL_ACCESS_TOKEN', None))
-
-# Channel Secret
 handler = WebhookHandler(os.getenv('CHANNEL_SECRET', None))
 
-# URL of databases
-database_url = os.getenv('DATABASE_URL', None)
+response_msgs= {
+    "1": """
+         National Taiwan University, Sep. 2017 ~ Jun. 2021 (Expected) \n
+         B.S., Computer Science and Information Engineering
+         """,
+    "2": """
+         - DBS Bank, Taiwan - IT Intern
+         - Shopee Taiwan I’m the Best Coder! Challenge 2020 - 3rd Place 
+         - Digital Speech Processing Laboratory, National Taiwan University - Undergraduate Researcher 
+         - Freshman ACM Contest in NTU CSIE - 6th Place
+         - Changhua Alumni Association, National Taiwan University - Director 
+         - Academic Dept., 2018 CSIE Night - Frontend Web Developer
+         """,
+    "3": """
+         - New York Times Bilingual News Crawler (Using Python)
+         - Implementation of Shading and Transformation (Using WebGL)
+         - Machine Learning Competitions on Kaggle (Mainly using PyTorch)
+         """
+    "4": """
+         - C/C++
+         - Python
+         - HTML/CSS/Javascript(React.js)
+         - Linux/Shell Script
+         - Git
+         """
+}
 
-# 監聽所有來自 /callback 的 Post Request
+welcome_msg = """
+Oops, Invalid option!
+
+If you would like to know more about me, here are some options for you:
+1. Education 
+2. History & Experience
+3. Projects
+4. Skills
+(ex: type 1 for eductation)
+
+Or you can send a sticker to get a random sticker in response:)
+"""
+
+# Listen all post requests from /callback
 @app.route("/callback", methods=['POST'])
 def callback():
     # get X-Line-Signature header value
@@ -39,18 +68,17 @@ def callback():
         abort(400)
     return 'OK'
 
-# 處理訊息
+# handle text message
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event): 
-    promotion = "Hi, I am Dylan.\n I am currently a student in NTUCSIE."
-    message = TextSendMessage(text=promotion)
-    line_bot_api.reply_message(event.reply_token, message)
+    if event.message.text in response_msgs:
+        msg = TextSendMessage(text=response_msgs[event.message.text])
+        line_bot_api.reply_message(event.reply_token, msg)
+    else:
+        msg = TextSendMessage(text=welcome_msg)
+        line_bot_api.reply_message(event.reply_token, msg)
 
-# @handler.add(MessageEvent, message=TextMessage)
-# def handle_message(event):
-#     message = TextSendMessage(text=event.message.text)
-#     line_bot_api.reply_message(event.reply_token, message)
-
+# handle sticker message
 @handler.add(MessageEvent, message=StickerMessage)
 def handle_sticker(event): 
     sticker = StickerSendMessage(package_id='11537', sticker_id=str(52002734 + random.randint(0, 39)))
@@ -60,3 +88,5 @@ def handle_sticker(event):
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port)
+
+    line_bot_api.push_message(ev)
