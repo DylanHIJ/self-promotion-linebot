@@ -1,0 +1,6 @@
+response_msgs = {
+    "1": "National Taiwan University, Sep. 2017 ~ Jun. 2021 (Expected)\nB.S., Computer Science and Information Engineering",
+    "2": "- DBS Bank, Taiwan - IT Intern\n- Shopee Taiwan I’m the Best Coder! Challenge 2020 - 3rd Place\n- Digital Speech Processing Laboratory, National Taiwan University - Undergraduate Researcher\n- Freshman ACM Contest in NTU CSIE - 6th Place\n- Changhua Alumni Association, National Taiwan University - Director\n- Academic Dept., 2018 CSIE Night - Frontend Web Developer",
+    "3": "- New York Times Bilingual News Crawler (Using Python)\n- Implementation of Shading and Transformation (Using WebGL)\n- Machine Learning Competitions on Kaggle (Mainly using PyTorch)",
+    "4": "- C/C++\n- Python\n- HTML/CSS/Javascript(React.js)\n- Linux/Shell Script\n- Git"
+}

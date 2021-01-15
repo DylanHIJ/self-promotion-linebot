@@ -1,4 +1,5 @@
 import os
+import json
 import psycopg2
 import random
 from flask import Flask, request, abort
@@ -11,35 +12,11 @@ app = Flask(__name__)
 line_bot_api = LineBotApi(os.getenv('CHANNEL_ACCESS_TOKEN', None))
 handler = WebhookHandler(os.getenv('CHANNEL_SECRET', None))
 
-response_msgs= {
-    "1": """
-- National Taiwan University, Sep. 2017 ~ Jun. 2021 (Expected) 
-- B.S., Computer Science and Information Engineering
-""",
-    "2": """
-- DBS Bank, Taiwan - IT Intern
-- Shopee Taiwan I’m the Best Coder! Challenge 2020 - 3rd Place 
-- Digital Speech Processing Laboratory, National Taiwan University - Undergraduate Researcher 
-- Freshman ACM Contest in NTU CSIE - 6th Place
-- Changhua Alumni Association, National Taiwan University - Director 
-- Academic Dept., 2018 CSIE Night - Frontend Web Developer
-""",
-    "3": """
- - New York Times Bilingual News Crawler (Using Python)
- - Implementation of Shading and Transformation (Using WebGL)
- - Machine Learning Competitions on Kaggle (Mainly using PyTorch)
- """,
-    "4": """
- - C/C++
- - Python
- - HTML/CSS/Javascript(React.js)
- - Linux/Shell Script
- - Git
- """
-}
+with open('./msgs.json') as f:
+  response_msgs = json.load(f)
 
-welcome_msg = """
-Oops, Invalid option!
+welcome_msg =\
+"""Oops, Invalid option!
 
 If you would like to know more about me, here are some options for you:
 1. Education 
@@ -48,8 +25,7 @@ If you would like to know more about me, here are some options for you:
 4. Skills
 (ex: type 1 for eductation)
 
-Or you can send a sticker to get a random sticker in response:)
-"""
+Or you can send a sticker to get a random sticker in response:)"""
 
 # Listen all post requests from /callback
 @app.route("/callback", methods=['POST'])
@@ -89,4 +65,3 @@ if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port)
 
-    line_bot_api.push_message(ev)
