@@ -14,10 +14,10 @@ from linebot.models import *
 app = Flask(__name__)
 
 # Channel Access Token
-line_bot_api = LineBotApi(os.getenv('YOUR_CHANNEL_ACCESS_TOKEN', None))
+line_bot_api = LineBotApi(os.getenv('CHANNEL_ACCESS_TOKEN', None))
 
 # Channel Secret
-handler = WebhookHandler(os.getenv('YOUR_CHANNEL_SECRET', None))
+handler = WebhookHandler(os.getenv('CHANNEL_SECRET', None))
 
 # URL of databases
 database_url = os.getenv('DATABASE_URL', None)
